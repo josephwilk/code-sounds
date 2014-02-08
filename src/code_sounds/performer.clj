@@ -19,13 +19,13 @@
 (defn- find-pitch [character-code scale]
   (cond
    (<= 65 character-code 90)
-   (+ character-code transpose)
+   (nth scale (- character-code 40))
 
    (<= 97 character-code 122)
-   (nth scale (- character-code 80))
+   (nth scale (- character-code 75))
 
    (= character-code 32)
-   32
+   (if (some #{32} scale) 32 33)
 
    (<= 48 character-code 57)
    (+ transpose (nth numbers (code-as-number character-code)))
