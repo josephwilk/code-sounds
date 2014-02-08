@@ -1,6 +1,8 @@
 (ns code-sounds.core
   (:require [clojure.tools.cli]
-            [clojure.java.io :as io])
+            [clojure.java.io :as io]
+            [code-sounds.performer :as performer]
+            [code-sounds.code :as code])
   (:import [clojure.lang LineNumberingPushbackReader]))
 
 (def init-ns 'user)
@@ -35,9 +37,20 @@
       (do-read (careful-refer (create-ns init-ns))))))
 
 (defn run [source-file & args]
-  (-> source-file
+  (->> source-file
       io/file
       file->seq
-      expr-seq))
+      (mapcat expr-seq)))
 
-(println (run "/Users/josephwilk/Workspace/josephwilk/clojure/code-sounds/test/fixtures/bad_code.clj"))
+(comment
+
+  ;;Bad code
+  (performer/play
+   (assoc (code/with-metrics (run "/Users/josephwilk/Workspace/josephwilk/clojure/code-sounds/test/fixtures/bad_code.clj"))
+     :score 0))
+
+  ;; Good code
+  (performer/play
+   (assoc (code/with-metrics (run "/Users/josephwilk/Workspace/josephwilk/clojure/code-sounds/test/fixtures/bad_code.clj"))
+     :score 0.9))
+)
