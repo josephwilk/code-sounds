@@ -4,7 +4,7 @@ Like code smells only louder.
 
 Exploring how we can use sound to reveal the shape of a code base.
 
-## What do Functions sound like?
+## Describing code
 
 ```clojure
 (defn noisy [a b c d e f g h i j k]
@@ -13,12 +13,24 @@ Exploring how we can use sound to reveal the shape of a code base.
 
 ```clojure
 (defn disorderly [a b]
-(let [x 1]
-  (let [y 2]
-    (let [z 3]
-      (let [a 4] 
-        (let [b 5]))))))
+  (let [x 1]
+    (let [y 2]
+      (let [z 3]
+        (let [a 4] 
+          (let [b 5]))))))
 ```
+
+```clojure
+(defn verbose [this-is-a-variable-that-i-think-might-be-a-bit-long]
+  this-is-a-variable-that-i-think-might-be-a-bit-long)
+```
+
+```clojure
+(defn inconsistent [what-shall-we-do]
+  (let [what_shall_we_do 10]
+    (or what-shall-we-do what_shall_we_dp)))
+```
+
 
 ## License
 
